@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asistente Python (Ficha adaptativa)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Asistente Python</h1>
+      <p class="subtitle">Ficha online adaptativa</p>
+    </div>
+
+    <div class="controls">
+      <div class="level-group" role="group" aria-label="Nivel de Python">
+        <button id="lvlBeginner" class="btn level" type="button" aria-pressed="false">Beginner</button>
+        <button id="lvlStandard" class="btn level" type="button" aria-pressed="false">Standard</button>
+        <button id="lvlAdvanced" class="btn level" type="button" aria-pressed="false">Advanced</button>
+      </div>
+
+      <button id="btnTest" class="btn secondary" type="button">🧪 Test de nivel</button>
+      <button id="btnReset" class="btn secondary" type="button">🔄 Reset</button>
+      <button id="btnStart" class="btn primary" type="button">▶️ Inicio</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Conversación</h2>
+        <div class="status">
+          <span class="pill" id="levelPill">Nivel: —</span>
+          <span class="pill" id="connPill">Conexión: sin configurar</span>
+        </div>
+      </div>
+
+      <!-- “Campo de texto” donde se muestran mensajes del asistente y del alumno -->
+      <div id="chatLog" class="chat-log" aria-live="polite" aria-label="Mensajes">
+        <div class="msg assistant">
+          <div class="role">Asistente</div>
+          <div class="bubble">
+            Pulsa <strong>Inicio</strong> para comenzar. Si aún no has marcado nivel, elige uno o haz el test.
+          </div>
+        </div>
+      </div>
+
+      <!-- Campo de respuesta del alumno -->
+      <form id="chatForm" class="composer">
+        <input
+          id="studentInput"
+          type="text"
+          placeholder="Escribe tu respuesta aquí…"
+          autocomplete="off"
+          aria-label="Respuesta del alumno"
+          required
+        />
+        <button id="sendBtn" class="btn" type="submit">Enviar</button>
+      </form>
+
+      <div class="hint-line" id="hintLine">
+        Consejo: marca tu nivel o haz el test para recibir explicaciones adaptadas.
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <section class="card">
+        <h3>Cómo funciona</h3>
+        <ol>
+          <li>Elige nivel (o haz el test).</li>
+          <li>Pulsa <strong>Inicio</strong> al comenzar la clase.</li>
+          <li>El asistente te preguntará qué concepto quieres trabajar.</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h3>Conceptos sugeridos</h3>
+        <div class="chips" id="conceptChips">
+          <button class="chip" type="button" data-concept="variables">variables</button>
+          <button class="chip" type="button" data-concept="condicionales">condicionales</button>
+          <button class="chip" type="button" data-concept="bucles">bucles</button>
+          <button class="chip" type="button" data-concept="listas">listas</button>
+          <button class="chip" type="button" data-concept="funciones">funciones</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+<!-- Modal Test de nivel -->
+<dialog id="testModal">
+  <form method="dialog" class="modal">
+    <div class="modal-header">
+      <h3>Test de nivel (Python)</h3>
+      <button id="closeTest" class="btn" value="cancel" aria-label="Cerrar">✕</button>
+    </div>
+
+    <p class="modal-subtitle">
+      Responde 6 preguntas rápidas. Al final se seleccionará tu nivel automáticamente.
+    </p>
+
+    <div id="testQuestions" class="test-questions"></div>
+
+    <div class="modal-actions">
+      <button id="submitTest" class="btn primary" type="button">Calcular nivel</button>
+      <button class="btn secondary" value="cancel" type="submit">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
